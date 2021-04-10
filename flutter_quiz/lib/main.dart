@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quiz/answer.dart';
 import 'package:flutter_quiz/question.dart';
 
 void main() => runApp(MyApp());
@@ -18,7 +19,7 @@ class _MyAppState extends State<MyApp> {
     "Question 2",
   ];
 
-  void answerQuestion() {
+  void _answerQuestion() {
     setState(() {
       _questionIdx += 1;
     });
@@ -34,27 +35,9 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: [
             Question(question[_questionIdx]),
-            ElevatedButton(
-              onPressed: answerQuestion,
-              child: Text("Answer 1"),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.blue),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: answerQuestion,
-              child: Text("Answer 2"),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.blue),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: answerQuestion,
-              child: Text("Answer 3"),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.red),
-              ),
-            ),
+            Answer("Answer 1", _answerQuestion),
+            Answer("Answer 2", _answerQuestion),
+            Answer("Answer 3", _answerQuestion),
           ],
         ),
       ),
