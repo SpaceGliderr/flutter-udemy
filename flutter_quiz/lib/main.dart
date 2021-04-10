@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quiz/question.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return MyAppState();
+    return _MyAppState();
   }
 }
 
-class MyAppState extends State<MyApp> {
-  var questionIdx = 0;
+class _MyAppState extends State<MyApp> {
+  var _questionIdx = 0;
 
   var question = [
     "Question 1",
@@ -19,7 +20,7 @@ class MyAppState extends State<MyApp> {
 
   void answerQuestion() {
     setState(() {
-      questionIdx += 1;
+      _questionIdx += 1;
     });
   }
 
@@ -32,7 +33,7 @@ class MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Text(question[questionIdx]),
+            Question(question[_questionIdx]),
             ElevatedButton(
               onPressed: answerQuestion,
               child: Text("Answer 1"),
