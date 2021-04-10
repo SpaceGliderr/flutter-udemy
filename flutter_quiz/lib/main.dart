@@ -37,14 +37,23 @@ class _MyAppState extends State<MyApp> {
             ElevatedButton(
               onPressed: answerQuestion,
               child: Text("Answer 1"),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.blue),
+              ),
             ),
             ElevatedButton(
               onPressed: answerQuestion,
               child: Text("Answer 2"),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.blue),
+              ),
             ),
             ElevatedButton(
               onPressed: answerQuestion,
-              child: Text("Answer 2"),
+              child: Text("Answer 3"),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.red),
+              ),
             ),
           ],
         ),
