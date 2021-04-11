@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:personal_expenses/widgets/chart.dart';
 import 'package:personal_expenses/widgets/new_transaction.dart';
 import 'package:personal_expenses/widgets/transaction_list.dart';
 import 'package:uuid/uuid.dart';
@@ -45,20 +47,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _transactions = [
-    // Transaction(
-    //   id: "T1",
-    //   title: "Lunch",
-    //   amount: 29.90,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: "T2",
-    //   title: "Dinner",
-    //   amount: 19.90,
-    //   date: DateTime.now(),
-    // ),
-  ];
+  final List<Transaction> _transactions = [];
+
+  List<Transaction> get _recentTransactions {
+    // where is similar to lodash filter with custom function
+    return _transactions.where((transaction) {
+      return transaction.date.isAfter(
+        DateTime.now().subtract(Duration(days: 7)),
+      );
+    }).toList();
+  }
 
   void _addNewTransaction(String title, double amount) {
     final newTransaction = Transaction(
@@ -79,8 +77,8 @@ class _MyHomePageState extends State<MyHomePage> {
       builder: (_) {
         return GestureDetector(
           child: NewTransaction(_addNewTransaction),
-          onTap:
-              () {}, // these 2 lines help prevent the modal from closing when the user taps on the modal
+          // these 2 lines help prevent the modal from closing when the user taps on the modal
+          onTap: () {},
           behavior: HitTestBehavior.opaque,
         );
       },
@@ -103,12 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              child: Card(
-                child: Text("CHART HERE"),
-                elevation: 5,
-              ),
-            ),
+            Chart(_recentTransactions),
             TransactionList(_transactions)
           ],
         ),
